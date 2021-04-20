@@ -8,13 +8,20 @@ class Action {
 
     worker() {
         if (this.command == "my_ip") {
-            alert("ppp");
-            fetch("https://api.myip.com", {
-                headers: {
-                    "Access-Control-Allow-Origin": "https://api.myip.com"
+            $.ajax({
+                url: "https://api.ipify.org?format=json",
+                success: function(result) {
+                    json_show(result);
                 }
-            }).then((response) => {
-                json_show(response.json())
+            });
+        }
+
+        if (this.command == "ip_find") {
+            $.ajax({
+                url: `https://ipapi.co/${this.data["ip"][0]}/json/`,
+                success: function(result) {
+                    json_show(result);
+                }
             });
         }
     }

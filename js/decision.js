@@ -1,4 +1,3 @@
-
 /*
 Prediction
  -- make_commom() is a method which make a dataset which is important of take decision
@@ -26,89 +25,84 @@ Prediction
 
 
 class Prediction {
-  constructor(text) {
-    this.text = text.toLowerCase()
-  }
-
-  make_common() {
-
-    let data1 = {};
-    let key,
-    value,
-    sample_data,
-    sub_data1,
-    sub_data2,i,j,k;
-
-    for (i of this.data) {
-      data1[i[0]] = "";
+    constructor(text) {
+        this.text = text.toLowerCase()
     }
 
-    for (j of this.data) {
-      key = j[0];
-      value = j[1];
-      data1[key] +=( " "+value.toLowerCase());
-      
-    }
+    make_common() {
 
+        let data1 = {};
+        let key,
+            value,
+            sample_data,
+            sub_data1,
+            sub_data2, i, j, k;
 
-    for (k in data1) {
-      sample_data = data1[k].split(" ");
-       sample_data=Array.from(sample_data)
-      sub_data2 = make_unique(sample_data);
-      data1[k] = sub_data2;
-    }
-    
-    return data1
-    
-
-  }
-
-
-  result() {
-    let data1 = this.make_common();
-    let data2 = this.text.split(" ");
-    let data3 = {};
-    let i,j,k,z,a;
-    let pos = 0;
-    for (i in data1) {
-      data3[i] = 0;
-    }
-    
-    for (j in data1) {
-      for (a of data2) {
-        if ((data1[j]).includes(a)) {
-          data3[j] += 1
+        for (i of this.data) {
+            data1[i[0]] = "";
         }
-      }
+
+        for (j of this.data) {
+            key = j[0];
+            value = j[1];
+            data1[key] += (" " + value.toLowerCase());
+
+        }
+
+
+        for (k in data1) {
+            sample_data = data1[k].split(" ");
+            sample_data = Array.from(sample_data)
+            sub_data2 = make_unique(sample_data);
+            data1[k] = sub_data2;
+        }
+
+        return data1
+
+
     }
-    
 
-    for (z in data3) {
-      data3[z] = (data3[z]/(data1[z].length));
+
+    result() {
+        let data1 = this.make_common();
+        let data2 = this.text.split(" ");
+        let data3 = {};
+        let i, j, k, z, a;
+        let pos = 0;
+        for (i in data1) {
+            data3[i] = 0;
+        }
+
+        for (j in data1) {
+            for (a of data2) {
+                if ((data1[j]).includes(a)) {
+                    data3[j] += 1
+                }
+            }
+        }
+
+
+        for (z in data3) {
+            data3[z] = (data3[z] ** 2 / (data1[z].length));
+        }
+
+
+        return data3
     }
 
 
-    return data3
-  }
+    dic_toMax() {
+        let data1 = this.result();
+        let data2 = [];
+        let i, max_probability;
 
+        for (i in data1) {
+            data2.push([data1[i], i])
+        }
 
-  dic_toMax() {
-    let data1 = this.result()
-    let data2 = []
-    let i,max_probability;
-    
-    for (i in data1) {
-      data2.push([data1[i], i])
+        max_probability = find_max(data2);
+
+        return max_probability
     }
-    
-    max_probability=find_max(data2);
-
-    return max_probability
-  }
 
 }
-
-
-
-
-

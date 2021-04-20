@@ -20,8 +20,7 @@ class AI {
 let obj = new AI();
 obj.decision_data = [
     ['say_hello', 'hello hey hi '],
-    ['ip_find', 'ip find ip search'],
-    ['ip_find', 'locate my ip'],
+    ['ip_find', 'ip find ip search give me ip details of'],
     ['tell_weather', 'who is the weather dat today'],
     ["check_tor", "check my tor connection status"],
     ["my_ip", "what is my ip tell me show give locate"]
